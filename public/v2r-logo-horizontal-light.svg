@@ -1,0 +1,22 @@
+<svg viewBox="0 0 620 170" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="markGrad2" x1="20" y1="75" x2="82" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B4FE8"/>
+      <stop offset="100%" stop-color="#FFB020"/>
+    </linearGradient>
+    <linearGradient id="ringGrad2" x1="0" y1="100" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#5B4FE8"/>
+      <stop offset="100%" stop-color="#FFB020"/>
+    </linearGradient>
+  </defs>
+
+  <svg x="20" y="25" width="120" height="120" viewBox="0 0 100 100">
+    <rect x="4" y="4" width="92" height="92" rx="22" fill="#0A0A0F"/>
+    <rect x="4" y="4" width="92" height="92" rx="22" fill="none" stroke="url(#ringGrad2)" stroke-width="1.5" opacity="0.45"/>
+    <path d="M28,40 L47,64 L80,22" fill="none" stroke="url(#markGrad2)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="86.2" cy="14.1" r="6" fill="#FFB020"/>
+  </svg>
+
+  <text x="172" y="108" font-family="'Space Grotesk','Outfit','Helvetica Neue',Arial,sans-serif" font-weight="700" font-size="82" letter-spacing="-2" fill="#FFFFFF">V2R</text>
+  <text x="174" y="138" font-family="'JetBrains Mono','Space Mono',monospace" font-size="14" letter-spacing="5" fill="#A5B4FC" opacity="0.9">VISION TO REALITY</text>
+</svg>
