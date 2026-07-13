@@ -69,16 +69,16 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full glass-panel border-t border-white/10 p-6 md:hidden flex flex-col gap-4"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full bg-[#050505] border-t border-white/10 p-6 md:hidden flex flex-col gap-4 shadow-2xl z-50 overflow-hidden"
           >
             {navLinks.map((link) => (
               <a 
                 key={link.name}
                 href={link.href} 
-                className="text-lg text-gray-300 hover:text-white py-2"
+                className="text-xl font-serif text-gray-300 hover:text-white py-3 border-b border-white/5 last:border-0"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
@@ -88,7 +88,7 @@ export default function Navbar() {
               href={getWhatsAppLink(defaultWhatsAppMsg)}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 text-center bg-white text-background px-6 py-3 rounded-full font-medium hover:bg-gray-200 transition-colors"
+              className="mt-6 text-center bg-white text-black px-6 py-4 rounded-full text-xs font-mono tracking-widest uppercase hover:bg-gray-200 transition-colors"
             >
               Start Your Project
             </a>

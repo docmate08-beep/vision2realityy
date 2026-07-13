@@ -26,6 +26,8 @@ export default function WhyV2R() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    const isMobile = window.innerWidth < 768;
+    
     // 1. Scroll-Driven Text Reveal (Liquid Fill style)
     gsap.to('.v2r-reveal-text-1', {
       clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
@@ -33,7 +35,7 @@ export default function WhyV2R() {
       scrollTrigger: {
         trigger: '#v2r-text-reveal-section',
         start: 'top 80%',
-        end: 'center 40%',
+        end: isMobile ? 'center center' : 'center 40%',
         scrub: 1, 
       }
     });
@@ -43,23 +45,22 @@ export default function WhyV2R() {
       ease: 'none',
       scrollTrigger: {
         trigger: '#v2r-text-reveal-section',
-        start: 'top 70%',
-        end: 'bottom 40%',
+        start: isMobile ? 'top 70%' : 'top 70%',
+        end: isMobile ? 'bottom center' : 'bottom 40%',
         scrub: 1, 
       }
     }); 
 
-    // 2. Fade Up Elements with slight blur
-    gsap.utils.toArray('.v2r-fade-up').forEach((elem: any, i) => {
+    // 2. Fade Up Elements
+    gsap.utils.toArray('.v2r-fade-up').forEach((elem: any) => {
       gsap.fromTo(elem, 
-        { y: 60, opacity: 0, filter: 'blur(10px)' },
+        { y: 40, opacity: 0 },
         {
-          y: 0, opacity: 1, filter: 'blur(0px)', duration: 1.5, ease: 'power3.out',
+          y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
           scrollTrigger: {
             trigger: elem,
-            start: 'top 90%',
-          },
-          delay: i * 0.1
+            start: 'top 95%',
+          }
         }
       );
     });

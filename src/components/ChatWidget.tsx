@@ -107,13 +107,14 @@ export default function ChatWidget() {
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end"
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[100]"
           >
             <button
               onClick={() => setIsOpen(true)}
-              className="w-14 h-14 bg-white text-background rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(255,255,255,0.3)] hover:scale-110 transition-transform duration-300"
+              className="w-14 h-14 sm:w-16 sm:h-16 bg-white text-black rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform duration-300"
             >
-              <MessageSquare size={24} />
+              <MessageSquare size={24} strokeWidth={1.5} />
             </button>
           </motion.div>
         )}
@@ -123,68 +124,68 @@ export default function ChatWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[500px] max-h-[80vh] glass-panel border border-white/20 rounded-3xl flex flex-col overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+            initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: 'bottom right' }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className="fixed bottom-0 right-0 sm:bottom-10 sm:right-10 z-[100] w-full sm:w-[420px] h-[100svh] sm:h-[600px] sm:max-h-[85vh] bg-[#0A0A0A] sm:rounded-3xl flex flex-col shadow-[0_30px_60px_rgba(0,0,0,0.8)] border-0 sm:border border-white/10 overflow-hidden"
           >
             {/* Header */}
-            <div className="p-4 border-b border-white/10 flex justify-between items-center bg-background/50">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white text-background flex items-center justify-center">
-                  <Bot size={18} />
+            <div className="px-6 py-5 border-b border-white/5 flex justify-between items-center bg-[#050505] relative z-10">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-lg">
+                  <Bot size={20} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <h3 className="font-display font-bold text-white text-sm">V2R Assistant</h3>
-                  <div className="flex items-center gap-1.5">
+                  <h3 className="font-serif text-lg text-white font-light tracking-wide">V2R Assistant</h3>
+                  <div className="flex items-center gap-2 mt-0.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span className="text-xs text-gray-400">Online</span>
+                    <span className="text-[10px] text-gray-400 font-mono uppercase tracking-[0.2em]">Online</span>
                   </div>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white transition-colors"
+                className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
               >
-                <X size={20} />
+                <X size={20} strokeWidth={1.5} />
               </button>
             </div>
 
             {/* Persistent WhatsApp Handoff */}
-            <div className="bg-white/[0.03] px-4 py-2 border-b border-white/5 flex justify-between items-center">
-              <span className="text-xs text-gray-400">Want to talk to a human?</span>
+            <div className="bg-[#080808] px-6 py-3 border-b border-white/5 flex justify-between items-center relative z-10">
+              <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Talk to a human?</span>
               <a 
                 href={getWhatsAppLink(getWhatsAppMessageContext())}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs font-bold text-white flex items-center gap-1 hover:underline"
+                className="text-[10px] font-mono text-white flex items-center gap-2 hover:opacity-70 transition-opacity uppercase tracking-widest"
               >
-                WhatsApp Us <ArrowUpRight size={12} />
+                WhatsApp <ArrowUpRight size={12} />
               </a>
             </div>
 
-            {/* Messages Area - Added data-lenis-prevent to fix scroll */}
-            <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4" data-lenis-prevent="true">
+            {/* Messages Area */}
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-6 relative z-0 bg-gradient-to-b from-[#050505] to-[#0A0A0A]" data-lenis-prevent="true">
               {messages.map((msg) => (
                 <div 
                   key={msg.id} 
                   className={cn(
-                    "flex gap-3 max-w-[90%]",
+                    "flex gap-4 max-w-[85%]",
                     msg.role === 'user' ? "ml-auto flex-row-reverse" : "mr-auto"
                   )}
                 >
                   <div className={cn(
-                    "w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-1",
-                    msg.role === 'user' ? "bg-white/10 text-white" : "bg-white text-background"
+                    "w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1",
+                    msg.role === 'user' ? "bg-white/5 text-white border border-white/10" : "bg-white text-black"
                   )}>
-                    {msg.role === 'user' ? <User size={12} /> : <Bot size={12} />}
+                    {msg.role === 'user' ? <User size={14} strokeWidth={1.5} /> : <Bot size={14} strokeWidth={1.5} />}
                   </div>
                   <div className={cn(
-                    "p-3 rounded-2xl text-sm leading-relaxed prose prose-invert prose-p:leading-snug prose-a:text-blue-400 prose-a:underline hover:prose-a:text-blue-300 max-w-none",
+                    "p-4 text-[13px] sm:text-sm leading-relaxed prose prose-invert max-w-none shadow-sm font-sans font-light",
                     msg.role === 'user' 
-                      ? "bg-white text-background rounded-tr-sm" 
-                      : "bg-white/10 text-gray-200 rounded-tl-sm border border-white/5"
+                      ? "bg-white text-black rounded-2xl rounded-tr-sm" 
+                      : "bg-[#111] text-gray-200 rounded-2xl rounded-tl-sm border border-white/5"
                   )}>
                     {msg.role === 'bot' ? (
                       <ReactMarkdown>{msg.content}</ReactMarkdown>
@@ -196,37 +197,37 @@ export default function ChatWidget() {
               ))}
               
               {isTyping && (
-                <div className="flex gap-3 max-w-[85%] mr-auto">
-                   <div className="w-6 h-6 rounded-full bg-white text-background flex items-center justify-center shrink-0 mt-1">
-                    <Bot size={12} />
+                <div className="flex gap-4 max-w-[85%] mr-auto">
+                   <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shrink-0 mt-1">
+                    <Bot size={14} strokeWidth={1.5} />
                   </div>
-                  <div className="p-4 rounded-2xl bg-white/10 rounded-tl-sm border border-white/5 flex gap-1.5 items-center">
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
+                  <div className="px-5 py-4 rounded-2xl bg-[#111] rounded-tl-sm border border-white/5 flex gap-1.5 items-center">
+                    <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce"></span>
+                    <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></span>
+                    <span className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></span>
                   </div>
                 </div>
               )}
-              <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} className="h-4" />
             </div>
 
             {/* Input Area */}
-            <div className="p-4 bg-background/80 border-t border-white/10">
+            <div className="p-4 sm:p-6 bg-[#050505] border-t border-white/5 relative z-10 pb-8 sm:pb-6">
               <div className="relative flex items-center">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyPress}
-                  placeholder="Ask me anything..."
-                  className="w-full bg-white/5 border border-white/10 rounded-full pl-4 pr-12 py-3 text-sm text-white focus:outline-none focus:border-white/30 transition-colors"
+                  placeholder="Type your message..."
+                  className="w-full bg-[#111] border border-white/10 rounded-full pl-6 pr-14 py-4 text-sm font-light text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
-                  className="absolute right-2 p-1.5 bg-white text-background rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform"
+                  className="absolute right-2 p-2.5 bg-white text-black rounded-full disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-transform"
                 >
-                  <Send size={14} className="ml-0.5" />
+                  <Send size={16} className="ml-0.5" strokeWidth={1.5} />
                 </button>
               </div>
             </div>
