@@ -1,9 +1,12 @@
 import { useRef } from 'react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { getWhatsAppLink } from '../lib/utils';
-import TiltCard from './TiltCard';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import AnimatedText from './AnimatedText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
   const defaultWhatsAppMsg = "Hi V2R Team, I'm interested in starting a project.";
@@ -11,69 +14,99 @@ export default function Hero() {
 
   useGSAP(() => {
     const tl = gsap.timeline();
-    tl.to('.hero-bg-img', { scale: 1.05, duration: 2, ease: 'power2.out' }, 0)
-      .to('.hero-title', { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out' }, 0.5)
-      .to('.hero-subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power2.out' }, 1)
-      .to('.hero-buttons', { opacity: 1, duration: 1, ease: 'power2.out' }, 1.2);
+    
+    // Slow infinite zoom for background
+    gsap.to('.hero-bg-img', { 
+      scale: 1.15, 
+      duration: 20, 
+      ease: 'none',
+      repeat: -1,
+      yoyo: true
+    });
+
+    // Parallax on scroll
+    gsap.to('.hero-bg-img', {
+      yPercent: 30,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: container.current,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    // Intro Animations
+    tl.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 2.5 }) // Delayed for loader
+      .fromTo('.hero-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, "-=0.5")
+      .fromTo('.hero-btn', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.2 }, "-=0.5");
+
   }, { scope: container });
 
   return (
-    <section ref={container} className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-dark text-white">
-      {/* Dynamic Background Image */}
-      <div className="absolute inset-0 z-0 opacity-20">
+    <section ref={container} className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-[#050505] text-white">
+      {/* Cinematic Background Layer */}
+      <div className="absolute inset-0 z-0 opacity-40">
         <img 
           src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2915&auto=format&fit=crop" 
           alt="Luxury Abstract Background" 
           className="w-full h-full object-cover hero-bg-img" 
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#050505]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] z-10"></div>
       </div>
       
-      {/* Floating Glowing Orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+      {/* Floating Glowing Orbs for depth */}
+      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
 
-      <div className="container mx-auto px-6 max-w-6xl relative z-10 text-center">
+      <div className="container mx-auto px-6 max-w-6xl relative z-20 text-center">
         
         {/* Badge */}
-        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel text-sm font-mono text-gray-300 mb-10 border border-white/20 shadow-[0_0_20px_rgba(255,255,255,0.05)] hero-subtitle opacity-0 translate-y-5">
+        <div className="hero-badge inline-flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-md bg-white/[0.02] text-sm font-mono text-gray-300 mb-12 border border-white/10 shadow-[0_0_30px_rgba(255,255,255,0.03)]">
           <Sparkles size={16} className="text-white" />
-          <span className="font-medium tracking-widest uppercase text-xs">IIT-Founded Engineering Agency</span>
+          <span className="font-medium tracking-[0.2em] uppercase text-[10px]">IIT-Founded Engineering Agency</span>
         </div>
 
-        {/* Main Headline */}
-        <div className="relative mb-8">
-          <h1 className="text-5xl md:text-7xl lg:text-[7rem] font-semibold font-serif leading-[1.05] tracking-tight hero-title opacity-0 translate-y-10">
-            Vision to <br className="hidden md:block" />
-            <span className="italic font-light">Reality</span>
-          </h1>
+        {/* Main Headline with Split Text */}
+        <div className="relative mb-10 pointer-events-none">
+          <AnimatedText 
+            text="Vision to" 
+            type="chars" 
+            animation="fadeUp" 
+            delay={1.5} // Wait for loader
+            className="text-6xl md:text-8xl lg:text-[9rem] font-semibold font-serif leading-[1] tracking-tight justify-center" 
+          />
+          <AnimatedText 
+            text="Reality" 
+            type="chars" 
+            animation="blurIn" 
+            delay={1.8} 
+            className="text-6xl md:text-8xl lg:text-[9rem] font-light font-serif italic leading-[1] tracking-tight justify-center mt-2 text-gray-300" 
+          />
         </div>
 
-        <p className="text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-14 font-sans leading-relaxed hero-subtitle opacity-0 translate-y-5">
+        <p className="hero-desc text-lg md:text-2xl text-gray-400 max-w-3xl mx-auto mb-16 font-sans leading-relaxed tracking-wide">
           The best minds building your product. From complex AI automations to scalable web applications — everything engineered in one place.
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 hero-buttons opacity-0">
-          <TiltCard className="w-full sm:w-auto h-auto">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-8 relative z-30">
             <a 
               href={getWhatsAppLink(defaultWhatsAppMsg)}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative w-full sm:w-auto px-10 py-5 bg-white text-background rounded-full font-bold flex items-center justify-center gap-3 overflow-hidden border border-white"
+              className="hero-btn group relative px-12 py-5 bg-white text-black rounded-full font-bold flex items-center justify-center gap-4 overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <span className="relative z-10 text-background uppercase tracking-widest text-sm">Start Your Project</span>
-              <ArrowRight size={20} className="relative z-10 text-background group-hover:translate-x-1 transition-transform duration-300" />
+              <div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <span className="relative z-10 uppercase tracking-[0.2em] text-xs font-mono">Start Your Project</span>
+              <ArrowRight size={18} className="relative z-10 group-hover:translate-x-2 transition-transform duration-500 ease-out" />
             </a>
-          </TiltCard>
           
-          <TiltCard className="w-full sm:w-auto h-auto">
             <a 
               href="#work"
-              className="w-full sm:w-auto px-10 py-5 glass-panel text-white rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center text-sm uppercase tracking-widest border border-white/20"
+              className="hero-btn group px-12 py-5 backdrop-blur-md bg-white/[0.03] text-white rounded-full font-bold hover:bg-white/10 transition-colors flex items-center justify-center text-xs uppercase tracking-[0.2em] font-mono border border-white/20"
             >
               Explore Our Work
             </a>
-          </TiltCard>
         </div>
       </div>
     </section>
