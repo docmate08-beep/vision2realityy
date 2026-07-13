@@ -1,6 +1,10 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import TiltCard from './TiltCard';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -27,80 +31,86 @@ const projects = [
 ];
 
 export default function Portfolio() {
+  const container = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    // Parallax Image Effects
+    gsap.utils.toArray('.portfolio-parallax-img').forEach((img: any) => {
+      gsap.to(img, {
+        yPercent: -20,
+        ease: "none",
+        scrollTrigger: {
+          trigger: img.parentNode,
+          start: "top bottom", 
+          end: "bottom top",
+          scrub: true
+        }
+      });
+    });
+
+    // Fade Up Elements
+    gsap.utils.toArray('.portfolio-fade-up').forEach((elem: any) => {
+      gsap.from(elem, {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: elem,
+          start: 'top 85%',
+        },
+      });
+    });
+  }, { scope: container });
+
   return (
-    <section id="work" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
+    <section ref={container} id="work" className="py-32 relative overflow-hidden bg-dark">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505] to-transparent pointer-events-none z-0"></div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <h2 className="text-4xl md:text-6xl font-bold font-display mb-4 tracking-tighter text-white">Selected <span className="italic text-gray-400">Work.</span></h2>
-            <p className="text-gray-400 text-lg md:text-xl max-w-xl">
+        <div className="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8 portfolio-fade-up">
+          <div>
+            <h2 className="text-4xl md:text-6xl font-serif mb-6 tracking-tight text-white">Selected <span className="italic font-light text-gray-500">Work.</span></h2>
+            <p className="text-gray-400 text-lg md:text-xl max-w-xl font-sans">
               A glimpse into the systems we've engineered. Built for scale, optimized for performance.
             </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <a href="#services" className="group inline-flex items-center gap-3 px-6 py-3 rounded-full glass-panel hover:border-white/50 transition-colors font-bold text-white">
-              Start your project <ArrowUpRight size={20} className="group-hover:text-white group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
+          </div>
+          <div>
+            <a href="#services" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white hover:bg-white hover:text-black transition-colors uppercase tracking-widest text-sm text-white">
+              Start your project <ArrowUpRight size={20} className="transition-transform" />
             </a>
-          </motion.div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col gap-32">
           {projects.map((project, index) => (
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              key={project.title}
-              className="h-full"
-            >
-              <TiltCard className="h-full">
-                <div className="group premium-card p-0 overflow-hidden h-full flex flex-col relative">
-
-                  {/* Project Image */}
-                  <div className="aspect-[4/3] w-full bg-[#0A0A0F] relative overflow-hidden flex items-center justify-center">
-                    <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0F] via-[#0A0A0F]/20 to-transparent z-10 pointer-events-none"></div>
-                    
-                    {/* Category Tag */}
-                    <div className="absolute top-6 left-6 z-20 px-4 py-1.5 bg-background/80 backdrop-blur-md rounded-full text-xs font-mono text-gray-200 border border-white/10 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
-                      {project.category}
-                    </div>
-                  </div>
-
-                  {/* Project Details */}
-                  <div className="p-8 relative z-20 flex-1 flex flex-col">
-                    <h3 className="text-3xl font-bold font-display mb-3 text-white group-hover:text-gray-200 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 text-base mb-8 leading-relaxed flex-1">
-                      {project.description}
-                    </p>
-                    
-                    {/* Tech Stack Tags */}
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tech.map(tech => (
-                        <span key={tech} className="px-3 py-1.5 bg-white/5 rounded-lg text-xs font-mono text-gray-300 border border-white/10 group-hover:border-white/30 transition-colors">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+            <div key={project.title} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 items-center portfolio-fade-up`}>
+              
+              <div className="w-full md:w-3/5 parallax-wrapper h-[60vh] rounded-sm">
+                <img src={project.image} alt={project.title} className="parallax-img portfolio-parallax-img grayscale hover:grayscale-0 transition-all duration-700" />
+              </div>
+              
+              <div className={`w-full md:w-2/5 ${index % 2 !== 0 ? 'md:text-right' : ''}`}>
+                <div className={`inline-block px-4 py-1.5 bg-white/5 rounded-full text-xs font-mono text-gray-400 border border-white/10 mb-6`}>
+                  {project.category}
                 </div>
-              </TiltCard>
-            </motion.div>
+                
+                <h3 className="font-serif text-3xl md:text-5xl mb-6 text-white">{project.title}</h3>
+                
+                <p className="text-gray-400 font-sans leading-relaxed text-lg mb-8">
+                  {project.description}
+                </p>
+                
+                <div className={`flex flex-wrap gap-2 ${index % 2 !== 0 ? 'md:justify-end' : ''}`}>
+                  {project.tech.map(tech => (
+                    <span key={tech} className="px-3 py-1.5 bg-transparent rounded-sm text-xs uppercase tracking-widest text-gray-500 border border-white/10">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
           ))}
         </div>
       </div>
