@@ -48,8 +48,8 @@ export default function Hero() {
       {/* Cinematic Background Layer */}
       <div className="absolute inset-0 z-0 opacity-40">
         <img 
-          src="https://images.unsplash.com/photo-1631269666063-e4d02636283c?q=80&w=3000&auto=format&fit=crop" 
-          alt="Black Rolls Royce" 
+          src="/rolls-royce-hero.jpg" 
+          alt="Custom Black Rolls Royce Background" 
           className="w-full h-full object-cover hero-bg-img" 
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] z-10"></div>
