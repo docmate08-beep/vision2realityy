@@ -62,3 +62,37 @@ html.lenis {
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
 }
+
+/* Text Fill Animation Styles */
+.text-fill-container {
+    position: relative;
+    display: inline-block;
+}
+
+.text-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+    color: transparent;
+}
+
+.text-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #ffffff;
+    clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); /* Start hidden from left */
+    -webkit-text-stroke: 0px transparent;
+    white-space: nowrap;
+}
+
+/* Image Parallax Container */
+.parallax-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.parallax-img {
+    width: 100%;
+    height: 120%; /* Extra height for parallax */
+    object-fit: cover;
+    transform-origin: center;
+}
