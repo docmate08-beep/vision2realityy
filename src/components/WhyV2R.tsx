@@ -69,20 +69,20 @@ export default function WhyV2R() {
     <section ref={container} id="about" className="py-32 relative overflow-hidden bg-[#050505]">
       
       {/* Title Section with GSAP Text Fill */}
-      <div id="v2r-text-reveal-section" className="container mx-auto px-6 max-w-6xl relative z-10 mb-32 pt-20">
-        <div className="text-left md:text-center mb-24">
-          <p className="text-xs tracking-[0.4em] uppercase text-gray-500 mb-12 font-mono v2r-fade-up">About V2R</p>
-          <div className="font-serif text-5xl md:text-7xl lg:text-[8rem] font-medium leading-[1.1] tracking-tight relative text-fill-container text-reveal-wrap">
+      <div id="v2r-text-reveal-section" className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-10 mb-20 sm:mb-32 pt-10 sm:pt-20">
+        <div className="text-left md:text-center mb-16 sm:mb-24">
+          <p className="text-[10px] sm:text-xs tracking-[0.3em] sm:tracking-[0.4em] uppercase text-gray-500 mb-8 sm:mb-12 font-mono v2r-fade-up">About V2R</p>
+          <div className="font-serif text-[11vw] sm:text-5xl md:text-7xl lg:text-[8rem] font-medium leading-[1.1] tracking-tight relative text-fill-container text-reveal-wrap">
             <div className="text-outline">ENGINEERED BY</div>
             <div className="text-fill v2r-reveal-text-1 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white">ENGINEERED BY</div>
           </div>
-          <div className="font-serif text-5xl md:text-7xl lg:text-[8rem] font-light leading-[1.1] tracking-tight relative text-fill-container text-reveal-wrap mt-2">
+          <div className="font-serif text-[11vw] sm:text-5xl md:text-7xl lg:text-[8rem] font-light leading-[1.1] tracking-tight relative text-fill-container text-reveal-wrap mt-1 sm:mt-2">
             <div className="text-outline italic text-gray-700">THE BEST MINDS</div>
             <div className="text-fill v2r-reveal-text-2 italic bg-clip-text text-transparent bg-gradient-to-r from-gray-300 via-white to-gray-400">THE BEST MINDS</div>
           </div>
         </div>
         
-        <div className="max-w-3xl mx-auto md:text-center text-gray-400 text-xl md:text-2xl font-sans leading-relaxed v2r-fade-up font-light tracking-wide">
+        <div className="max-w-[95%] sm:max-w-3xl mx-auto md:text-center text-gray-400 text-lg sm:text-xl md:text-2xl font-sans leading-relaxed v2r-fade-up font-light tracking-wide will-change-transform">
           We don't just write code; we architect systems that scale. When you work with V2R, you're partnering with top-tier technical talent dedicated to turning your vision into a robust reality.
         </div>
       </div>

@@ -46,14 +46,14 @@ export default function Loader({ onComplete }: LoaderProps) {
     >
       <div className="absolute inset-0 bg-noise opacity-10"></div>
       
-      <div className="loader-text flex flex-col items-center justify-center relative z-10">
-        <h1 className="text-white text-5xl md:text-7xl font-serif tracking-tighter mb-4">V2R</h1>
-        <div className="flex items-end gap-2 font-mono text-gray-500 text-sm tracking-widest uppercase">
+      <div className="loader-text flex flex-col items-center justify-center relative z-10 w-full px-4">
+        <h1 className="text-white text-[15vw] sm:text-5xl md:text-7xl font-serif tracking-tighter mb-4 text-center">V2R</h1>
+        <div className="flex items-end justify-center gap-2 font-mono text-gray-500 text-[10px] sm:text-sm tracking-[0.2em] uppercase w-full">
           <span>Loading Experience</span>
-          <span className="text-white text-lg w-10 text-right">{progress}%</span>
+          <span className="text-white text-xs sm:text-lg w-8 sm:w-10 text-right">{progress}%</span>
         </div>
         
-        <div className="w-48 h-[1px] bg-white/10 mt-6 relative overflow-hidden">
+        <div className="w-32 sm:w-48 h-[1px] bg-white/10 mt-6 relative overflow-hidden mx-auto">
           <div 
             className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}

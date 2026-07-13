@@ -48,7 +48,7 @@ export default function Portfolio() {
     if (!sectionRef.current || !scrollContainerRef.current) return;
 
     if (isMobile) {
-      // Standard vertical fade up for mobile
+      // Mobile Cinematic Animations
       const elements = gsap.utils.toArray('.mobile-fade-up');
       elements.forEach((elem: any) => {
         gsap.fromTo(elem, 
@@ -56,6 +56,21 @@ export default function Portfolio() {
           { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: elem, start: 'top 85%' } }
         );
       });
+      
+      // Mobile image parallax
+      gsap.utils.toArray('.mobile-parallax-img').forEach((img: any) => {
+        gsap.to(img, {
+          yPercent: 20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img.parentNode,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+      
       return;
     }
 
@@ -107,25 +122,25 @@ export default function Portfolio() {
     <section ref={sectionRef} id="work" className="relative bg-[#050505] overflow-hidden">
       
       {/* Title Section (Sticky in desktop, static in mobile) */}
-      <div className={`absolute top-0 left-0 w-full z-10 pt-32 px-6 pointer-events-none ${isMobile ? 'relative' : ''}`}>
-        <div className="container mx-auto max-w-7xl flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div className={`absolute top-0 left-0 w-full z-10 pt-20 sm:pt-32 px-4 sm:px-6 pointer-events-none ${isMobile ? 'relative' : ''}`}>
+        <div className="container mx-auto max-w-7xl flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
           <div>
             <AnimatedText 
               text="Selected" 
               type="chars" 
               animation="fadeUp" 
-              className="text-5xl md:text-7xl font-serif tracking-tight text-white leading-none pointer-events-auto"
+              className="text-[12vw] sm:text-5xl md:text-7xl font-serif tracking-tight text-white leading-none pointer-events-auto will-change-transform"
             />
             <AnimatedText 
               text="Work." 
               type="chars" 
               animation="blurIn" 
               delay={0.2}
-              className="text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none pointer-events-auto"
+              className="text-[12vw] sm:text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none pointer-events-auto will-change-transform"
             />
           </div>
-          <div className="pointer-events-auto">
-            <a href="#services" className="group inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/20 hover:border-white transition-colors uppercase tracking-[0.2em] text-xs text-white font-mono bg-white/[0.02] backdrop-blur-sm">
+          <div className="pointer-events-auto mt-4 sm:mt-0 w-full sm:w-auto">
+            <a href="#services" className="group flex sm:inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 sm:py-4 rounded-full border border-white/20 hover:border-white transition-colors uppercase tracking-[0.2em] text-[10px] sm:text-xs text-white font-mono bg-white/[0.02] backdrop-blur-sm w-full sm:w-auto">
               Start your project <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </a>
           </div>
@@ -134,24 +149,25 @@ export default function Portfolio() {
 
       {isMobile ? (
         // Mobile Layout (Vertical)
-        <div className="container mx-auto px-6 py-20 mt-10">
-          <div className="flex flex-col gap-24">
+        <div className="container mx-auto px-4 py-10 mt-6">
+          <div className="flex flex-col gap-20">
             {projects.map((project) => (
-              <div key={project.title} className="flex flex-col gap-8 mobile-fade-up">
-                <div className="w-full aspect-[4/5] rounded-xl overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
-                  <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover" />
+              <div key={project.title} className="flex flex-col gap-6 mobile-fade-up">
+                <div className="w-full h-[60vh] rounded-2xl overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  <img src={project.image} alt={project.title} className="mobile-parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%] will-change-transform" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
                 </div>
                 <div>
-                  <div className="inline-block px-4 py-1.5 bg-white/5 rounded-full text-[10px] font-mono text-gray-400 uppercase tracking-widest border border-white/10 mb-6">
+                  <div className="inline-block px-4 py-1.5 bg-white/5 rounded-full text-[9px] font-mono text-gray-400 uppercase tracking-widest border border-white/10 mb-4">
                     {project.category}
                   </div>
-                  <h3 className="font-serif text-3xl mb-4 text-white font-light">{project.title}</h3>
-                  <p className="text-gray-400 font-sans text-sm leading-relaxed mb-6">
+                  <h3 className="font-serif text-3xl mb-3 text-white font-light">{project.title}</h3>
+                  <p className="text-gray-400 font-sans text-sm leading-relaxed mb-5">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map(tech => (
-                      <span key={tech} className="px-3 py-1.5 bg-transparent rounded text-[10px] uppercase tracking-widest text-gray-500 border border-white/10">
+                      <span key={tech} className="px-3 py-1.5 bg-transparent rounded text-[9px] uppercase tracking-widest text-gray-500 border border-white/10">
                         {tech}
                       </span>
                     ))}
