@@ -13,27 +13,32 @@ export default function Loader({ onComplete }: LoaderProps) {
   useGSAP(() => {
     let currentProgress = 0;
     
-    // Simulate loading
+    // Extremely fast loader mimicking immediate asset ready
     const interval = setInterval(() => {
-      currentProgress += Math.floor(Math.random() * 10) + 1;
-      if (currentProgress >= 100) {
-        currentProgress = 100;
+      currentProgress += Math.random() * 40 + 20; 
+      if (currentProgress > 100) currentProgress = 100;
+      setProgress(Math.floor(currentProgress));
+
+      if (currentProgress === 100) {
         clearInterval(interval);
         
-        // Outro Animation
-        const tl = gsap.timeline({
-          onComplete: onComplete
+        // Instant sharp fade out of text
+        gsap.to('.loader-text', {
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power2.inOut'
         });
 
-        tl.to('.loader-text', { opacity: 0, y: -20, duration: 0.5, ease: 'power2.in' })
-          .to(loaderRef.current, { 
-            clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)', // Mask reveal upwards
-            duration: 1.5, 
-            ease: 'expo.inOut' 
-          }, "+=0.2");
+        // Sharp upward clip-path reveal (Mercedes style)
+        gsap.to(loaderRef.current, {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+          duration: 0.8,
+          ease: 'power4.inOut',
+          delay: 0.2,
+          onComplete: onComplete
+        });
       }
-      setProgress(currentProgress);
-    }, 100);
+    }, 40);
 
     return () => clearInterval(interval);
   }, { scope: loaderRef });

@@ -12,21 +12,35 @@ const projects = [
     category: 'AI Automation',
     tech: ['Python', 'LangChain', 'OpenAI'],
     description: 'Fully autonomous customer support agent integrating with Zendesk. Handles 80% of L1 tickets instantly.',
-    image: '/ai_agent.jpg'
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=1000&auto=format&fit=crop'
   },
   {
     title: 'Fintech Dashboard',
     category: 'Web App',
     tech: ['React', 'Next.js', 'PostgreSQL'],
     description: 'Real-time financial analytics dashboard with complex data viz, handling millions of rows securely.',
-    image: '/fintech.jpg'
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop'
   },
   {
     title: 'Health Platform',
     category: 'Custom Software',
     tech: ['Node.js', 'MongoDB', 'React Native'],
     description: 'HIPAA-compliant patient management system connecting doctors and patients seamlessly.',
-    image: '/health.jpg'
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    title: 'Web3 Marketplace',
+    category: 'Blockchain',
+    tech: ['Solidity', 'Next.js', 'Ethers.js'],
+    description: 'Decentralized digital asset exchange with real-time bidding and low-latency smart contract execution.',
+    image: 'https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=1000&auto=format&fit=crop'
+  },
+  {
+    title: 'Headless Commerce',
+    category: 'E-Commerce',
+    tech: ['Shopify Plus', 'React', 'Tailwind'],
+    description: 'Ultra-fast headless architecture driving a 40% increase in mobile conversions for a luxury retail brand.',
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1000&auto=format&fit=crop'
   },
 ];
 
