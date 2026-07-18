@@ -186,7 +186,7 @@ export default function Hero() {
             onClick={() => handleScroll('#companies')}
             className="cta-primary w-full sm:w-auto"
           >
-            Explore Our Companies
+            Explore Our Services
           </button>
           <button
             onClick={() => handleScroll('#contact')}

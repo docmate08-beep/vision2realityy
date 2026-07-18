@@ -75,7 +75,7 @@ export default function OurCompanies() {
             {/* Content */}
             <div className="relative z-10">
               <span className="text-caption font-sans font-medium tracking-[0.15em] uppercase text-mate-accent">
-                Engineering Studio
+                Digital Agency
               </span>
 
               <h3 className="text-editorial text-white mt-3 sm:mt-4"
