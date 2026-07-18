@@ -44,20 +44,21 @@ export default function Hero() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden pt-20 bg-[#050505] text-white">
+    <section ref={container} className="relative w-full min-h-[100svh] flex flex-col items-center justify-center overflow-hidden pt-20 bg-[#050505] text-white">
       {/* Cinematic Background Layer */}
       <div className="absolute inset-0 z-0 opacity-40">
         <img 
           src="/rolls-royce-hero.jpg" 
           alt="Custom Black Rolls Royce Background" 
+          fetchPriority="high"
           className="w-full h-full object-cover hero-bg-img" 
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] z-10"></div>
       </div>
       
       {/* Floating Glowing Orbs for depth */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+      <div className="absolute top-1/3 left-1/4 w-[500px] max-w-[100vw] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] max-w-[100vw] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
 
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-20 text-center w-full">
         

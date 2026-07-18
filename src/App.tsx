@@ -49,7 +49,7 @@ function App() {
   }, []);
 
   return (
-    <div className={`relative min-h-screen bg-[#050505] ${!loaded ? 'h-screen overflow-hidden' : ''}`}>
+    <div className={`relative min-h-[100svh] w-full overflow-x-hidden bg-[#050505] ${!loaded ? 'h-[100svh] overflow-hidden' : ''}`}>
       {!loaded && <Loader onComplete={() => setLoaded(true)} />}
       <CustomCursor />
       

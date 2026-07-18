@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
             <a href="#" className="flex items-center gap-2 mb-6 group inline-flex hover:opacity-80 transition-opacity">
-              <img src="/v2r-logo-horizontal-light.svg" alt="V2R - Vision To Reality" className="h-12 md:h-14 w-auto" />
+              <img src="/v2r-logo-horizontal-light.svg" alt="V2R - Vision To Reality" loading="lazy" className="h-12 md:h-14 w-auto" />
             </a>
             <p className="text-gray-400 max-w-sm mb-6 leading-relaxed">
               An engineering-led software agency founded by IIT graduates. We build and manage high-performance digital products.
@@ -71,7 +71,7 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} V2R (Vision to Reality). All rights reserved.
+            © {new Date().getFullYear()} V2R (Vision to Reality) by TheMate. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm text-gray-500">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

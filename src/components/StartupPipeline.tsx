@@ -39,9 +39,9 @@ export default function StartupPipeline() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const isMobile = window.innerWidth < 1024;
+    let mm = gsap.matchMedia();
 
-    // Cinematic Text Reveal
+    // Cinematic Text Reveal (Runs on all devices)
     gsap.fromTo('.startup-title-line', 
       { y: 100, opacity: 0, rotateX: -45 },
       { 
@@ -56,40 +56,24 @@ export default function StartupPipeline() {
       }
     );
 
-    // Horizontal Scroll for Desktop
-    if (!isMobile && scrollContainerRef.current) {
-      const sections = gsap.utils.toArray('.startup-step-card');
-      
-      gsap.to(sections, {
-        xPercent: -100 * (sections.length - 1),
-        ease: "none",
-        scrollTrigger: {
-          trigger: container.current,
-          pin: true,
-          scrub: 1,
-          start: "center center",
-          end: "+=3000",
-        }
-      });
-    }
-
-    // Vertical Fade-up for Mobile
-    if (isMobile) {
-      gsap.utils.toArray('.startup-step-card').forEach((card: any) => {
-        gsap.fromTo(card,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1, y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-            }
+    mm.add("(min-width: 1024px)", () => {
+      // Horizontal Scroll for Desktop
+      if (scrollContainerRef.current) {
+        const sections = gsap.utils.toArray('.startup-step-card');
+        
+        gsap.to(sections, {
+          xPercent: -100 * (sections.length - 1),
+          ease: "none",
+          scrollTrigger: {
+            trigger: container.current,
+            pin: true,
+            scrub: 0.1,
+            start: "center center",
+            end: "+=1500",
           }
-        );
-      });
-    }
+        });
+      }
+    });
 
   }, { scope: container });
 
@@ -141,6 +125,7 @@ export default function StartupPipeline() {
                   <img 
                     src={step.image} 
                     alt={step.title} 
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transform scale-100 lg:group-hover:scale-105 transition-transform duration-[1.5s] ease-out grayscale-[0.3]"
                   />
                   {/* Cinematic Overlays */}

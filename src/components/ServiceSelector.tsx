@@ -100,6 +100,7 @@ export default function ServiceSelector() {
                   <img 
                     src={service.image} 
                     alt={service.title} 
+                    loading="lazy"
                     className="w-full h-[150%] object-cover object-center grayscale-[0.8] opacity-20 group-hover:scale-105 transition-transform duration-[20s] ease-out -translate-y-10" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-[#050505]"></div>
@@ -107,7 +108,7 @@ export default function ServiceSelector() {
 
                 {/* Mobile Image (Always visible but subtle) */}
                 <div className="absolute inset-0 overflow-hidden sm:hidden opacity-20 pointer-events-none">
-                  <img src={service.image} alt={service.title} className="w-full h-full object-cover grayscale" />
+                  <img src={service.image} alt={service.title} loading="lazy" className="w-full h-full object-cover grayscale" />
                   <div className="absolute inset-0 bg-black/80"></div>
                 </div>
 

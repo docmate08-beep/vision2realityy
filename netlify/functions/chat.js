@@ -103,9 +103,8 @@ export default async function handler(request) {
     return Response.json({ message: botMessage });
   } catch (error) {
     console.error('Chat function error:', error instanceof Error ? error.message : 'Unknown error');
-    return new Response(JSON.stringify({ error: 'Unable to generate a response right now' }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
+    return Response.json({ 
+      message: "Oops! My AI brain is currently offline (API key invalid or missing). Please configure a valid GEMINI_API_KEY, or click the WhatsApp link below to chat with a human!" 
     });
   }
 }

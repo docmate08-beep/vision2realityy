@@ -18,7 +18,9 @@ export default function Process() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    // 1. Text Fill Effect on Scroll
+    let mm = gsap.matchMedia();
+
+    // 1. Text Fill Effect on Scroll (All Devices)
     gsap.to('.process-title-fill', {
       clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
       ease: 'none',
@@ -26,18 +28,28 @@ export default function Process() {
         trigger: '.process-title-container',
         start: 'top 80%',
         end: 'top 40%',
-        scrub: 1,
+        scrub: 0.1,
       }
     });
 
+    // Mobile Defaults
+    mm.add("(max-width: 1023px)", () => {
+      const nodes = gsap.utils.toArray('.process-node');
+      nodes.forEach((node: any) => {
+        gsap.set(node.querySelector('.node-bg'), { scale: 1, opacity: 1 });
+        gsap.set(node.querySelector('.node-text'), { color: '#ffffff' });
+        gsap.set(node.querySelector('.node-content'), { opacity: 1, y: 0 });
+      });
+    });
+
     // 2. Timeline Progress Bar & Node Reveal (Desktop)
-    if (window.innerWidth >= 1024) {
+    mm.add("(min-width: 1024px)", () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: '.process-timeline-container',
           start: 'top 70%',
           end: 'bottom 50%',
-          scrub: 1,
+          scrub: 0.1,
         }
       });
 
@@ -60,18 +72,7 @@ export default function Process() {
           i * stepInterval
         );
       });
-    } else {
-      // Mobile staggered reveal
-      const nodes = gsap.utils.toArray('.process-node');
-      nodes.forEach((node: any) => {
-        gsap.to(node.querySelector('.node-bg'), { scale: 1, opacity: 1, duration: 0.5, ease: 'power2.out', scrollTrigger: { trigger: node, start: 'top 80%' } });
-        gsap.to(node.querySelector('.node-text'), { color: '#ffffff', duration: 0.5, scrollTrigger: { trigger: node, start: 'top 80%' } });
-        gsap.fromTo(node.querySelector('.node-content'), 
-          { opacity: 0, y: 30 },
-          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', scrollTrigger: { trigger: node, start: 'top 80%' } }
-        );
-      });
-    }
+    });
 
   }, { scope: container });
 

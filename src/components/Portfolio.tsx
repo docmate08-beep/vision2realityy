@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import AnimatedText from './AnimatedText';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,30 +48,14 @@ const projects = [
 export default function Portfolio() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+    
+    let mm = gsap.matchMedia();
 
-  useEffect(() => {
-    if (!sectionRef.current || !scrollContainerRef.current) return;
-
-    if (isMobile) {
-      // Mobile Cinematic Animations
-      const elements = gsap.utils.toArray('.mobile-fade-up');
-      elements.forEach((elem: any) => {
-        gsap.fromTo(elem, 
-          { y: 50, opacity: 0 },
-          { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: elem, start: 'top 85%' } }
-        );
-      });
-      
+    // Mobile Animations
+    mm.add("(max-width: 767px)", () => {
       // Mobile image parallax
       gsap.utils.toArray('.mobile-parallax-img').forEach((img: any) => {
         gsap.to(img, {
@@ -84,59 +69,55 @@ export default function Portfolio() {
           }
         });
       });
-      
-      return;
-    }
-
-    // Horizontal Scroll Pinning for Desktop
-    const pinWrap = scrollContainerRef.current;
-    const pinWrapWidth = pinWrap.scrollWidth;
-    
-    // Calculate how much we need to scroll horizontally
-    const scrollDistance = pinWrapWidth - window.innerWidth;
-
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: () => `+=${scrollDistance}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      }
     });
 
-    tl.to(pinWrap, {
-      x: -scrollDistance,
-      ease: 'none',
-    });
+    // Desktop Animations
+    mm.add("(min-width: 768px)", () => {
+      if (!scrollContainerRef.current) return;
+      const pinWrap = scrollContainerRef.current;
+      const pinWrapWidth = pinWrap.scrollWidth;
+      const scrollDistance = pinWrapWidth - window.innerWidth;
 
-    // Parallax on images while scrolling horizontally
-    gsap.utils.toArray('.portfolio-parallax-img').forEach((img: any) => {
-      gsap.to(img, {
-        xPercent: 15,
-        ease: 'none',
+      let tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
           end: () => `+=${scrollDistance}`,
-          scrub: 1,
+          pin: true,
+          scrub: 0.1,
           invalidateOnRefresh: true,
         }
       });
+
+      tl.to(pinWrap, {
+        x: -scrollDistance,
+        ease: 'none',
+      });
+
+      gsap.utils.toArray('.portfolio-parallax-img').forEach((img: any) => {
+        gsap.to(img, {
+          xPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: () => `+=${scrollDistance}`,
+            scrub: 0.1,
+            invalidateOnRefresh: true,
+          }
+        });
+      });
     });
 
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
-  }, [isMobile]);
+  }, { scope: sectionRef });
+
+
 
   return (
     <section ref={sectionRef} id="work" className="relative bg-[#050505] overflow-hidden">
       
       {/* Title Section (Sticky in desktop, static in mobile) */}
-      <div className={`absolute top-0 left-0 w-full z-10 pt-20 sm:pt-32 px-4 sm:px-6 pointer-events-none ${isMobile ? 'relative' : ''}`}>
+      <div className="relative md:absolute top-0 left-0 w-full z-10 pt-20 sm:pt-32 px-4 sm:px-6 pointer-events-none">
         <div className="container mx-auto max-w-7xl flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8">
           <div>
             <AnimatedText 
@@ -161,14 +142,13 @@ export default function Portfolio() {
         </div>
       </div>
 
-      {isMobile ? (
-        // Mobile Layout (Vertical)
-        <div className="container mx-auto px-4 py-10 mt-6">
-          <div className="flex flex-col gap-20">
+      {/* Mobile Layout (Vertical) */}
+      <div className="md:hidden container mx-auto px-4 py-10 mt-6">
+          <div className="flex flex-col gap-12">
             {projects.map((project) => (
               <div key={project.title} className="flex flex-col gap-6 mobile-fade-up">
                 <div className="w-full h-[60vh] rounded-2xl overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                  <img src={project.image} alt={project.title} className="mobile-parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%] will-change-transform" />
+                  <img src={project.image} alt={project.title} loading="lazy" className="mobile-parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%] will-change-transform" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
                 </div>
                 <div>
@@ -189,11 +169,10 @@ export default function Portfolio() {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      ) : (
-        // Desktop Layout (Horizontal Scroll Pinning)
-        <div className="h-screen flex items-center pt-32">
+      </div>
+
+      {/* Desktop Layout (Horizontal Scroll Pinning) */}
+      <div className="hidden md:flex h-screen items-center pt-32">
           <div ref={scrollContainerRef} className="pin-wrap px-[10vw]">
             <div className="flex gap-[15vw] items-center h-full">
               {projects.map((project) => (
@@ -204,6 +183,7 @@ export default function Portfolio() {
                     <img 
                       src={project.image} 
                       alt={project.title} 
+                      loading="lazy"
                       className="portfolio-parallax-img absolute inset-0 w-[120%] h-full object-cover -left-[10%] grayscale-[0.5] group-hover:grayscale-0 transition-all duration-1000" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
@@ -240,7 +220,7 @@ export default function Portfolio() {
             </div>
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 }

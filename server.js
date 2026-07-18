@@ -51,10 +51,16 @@ an engineering-led software agency founded by engineers.
 Visitor: "kya aap log app bhi banate ho?"
 You: "Haan bilkul — hum Android aur iOS dono ke liye apps banate hain, mostly React Native use karke for flawless cross-platform performance.
 Kis type ka app chahiye — ek naya idea hai ya existing business ke liye? 
-Agar aap seedhe discuss karna chahte hain, toh yahan click karein: [Chat on WhatsApp](https://wa.me/917068180478?text=I%20want%20to%20build%20an%20app)\`;
+Agar aap seedhe discuss karna chahte hain, toh yahan click karein: [Chat on WhatsApp](https://wa.me/917068180478?text=I%20want%20to%20build%20an%20app)`;
 
 app.post('/api/chat', async (req, res) => {
   try {
+    if (!process.env.GEMINI_API_KEY) {
+      return res.json({ 
+        message: "Oops! I am running in offline mode because the **GEMINI_API_KEY** is missing in the backend `.env` file. Please add it so I can connect to my AI brain, or click the WhatsApp link below to chat with a human!" 
+      });
+    }
+
     const { messages } = req.body;
     
     // Format messages for Gemini API
@@ -87,7 +93,9 @@ app.post('/api/chat', async (req, res) => {
     
     if (data.error) {
       console.error('Gemini API Error:', data.error);
-      return res.status(500).json({ error: 'Failed to generate response' });
+      return res.json({ 
+        message: "Oops! My AI brain is currently offline (API key invalid or missing). Please configure a valid GEMINI_API_KEY, or click the WhatsApp link below to chat with a human!" 
+      });
     }
 
     const botMessage = data.candidates[0].content.parts[0].text;

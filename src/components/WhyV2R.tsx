@@ -16,7 +16,7 @@ const LinkedinIcon = ({ size = 16, className = "" }) => (
 );
 
 const stats = [
-  { label: 'Combined Experience', value: '2+', suffix: ' Yrs', icon: Users },
+  { label: 'Combined Experience', value: '25+', suffix: ' Yrs', icon: Users },
   { label: 'Projects Delivered', value: '20+', suffix: '', icon: CheckCircle },
   { label: 'Technologies Mastered', value: '15+', suffix: '', icon: Code },
   { label: 'Systems Managed', value: '50+', suffix: '', icon: Server },
@@ -26,44 +26,71 @@ export default function WhyV2R() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const isMobile = window.innerWidth < 768;
-    
-    // 1. Scroll-Driven Text Reveal (Liquid Fill style)
-    gsap.to('.v2r-reveal-text-1', {
-      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#v2r-text-reveal-section',
-        start: 'top 80%',
-        end: isMobile ? 'center center' : 'center 40%',
-        scrub: 1, 
-      }
-    });
+    let mm = gsap.matchMedia();
 
-    gsap.to('.v2r-reveal-text-2', {
-      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#v2r-text-reveal-section',
-        start: isMobile ? 'top 70%' : 'top 70%',
-        end: isMobile ? 'bottom center' : 'bottom 40%',
-        scrub: 1, 
-      }
-    }); 
-
-    // 2. Fade Up Elements
-    gsap.utils.toArray('.v2r-fade-up').forEach((elem: any) => {
-      gsap.fromTo(elem, 
-        { y: 40, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
-          scrollTrigger: {
-            trigger: elem,
-            start: 'top 95%',
-          }
+    // Mobile Animations
+    mm.add("(max-width: 767px)", () => {
+      gsap.to('.v2r-reveal-text-1', {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#v2r-text-reveal-section',
+          start: 'top 80%',
+          end: 'center center',
+          scrub: 0.1, 
         }
-      );
+      });
+
+      gsap.to('.v2r-reveal-text-2', {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#v2r-text-reveal-section',
+          start: 'top 70%',
+          end: 'bottom center',
+          scrub: 0.1, 
+        }
+      }); 
     });
+
+    // Desktop Animations
+    mm.add("(min-width: 768px)", () => {
+      gsap.to('.v2r-reveal-text-1', {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#v2r-text-reveal-section',
+          start: 'top 80%',
+          end: 'center 40%',
+          scrub: 0.1, 
+        }
+      });
+
+      gsap.to('.v2r-reveal-text-2', {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#v2r-text-reveal-section',
+          start: 'top 70%',
+          end: 'bottom 40%',
+          scrub: 0.1, 
+        }
+      }); 
+
+      gsap.utils.toArray('.v2r-fade-up').forEach((elem: any) => {
+        gsap.fromTo(elem, 
+          { y: 40, opacity: 0 },
+          {
+            y: 0, opacity: 1, duration: 1.2, ease: 'power3.out',
+            scrollTrigger: {
+              trigger: elem,
+              start: 'top 95%',
+            }
+          }
+        );
+      });
+    });
+
   }, { scope: container });
 
   return (
@@ -92,7 +119,7 @@ export default function WhyV2R() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
           
           {/* Left: Stats */}
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
@@ -120,11 +147,7 @@ export default function WhyV2R() {
             {/* Founder 1 */}
             <div className="relative group v2r-fade-up">
               <TiltCard>
-                <div className="glass-panel rounded-2xl p-3 pb-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
-                  <div className="w-full aspect-[4/5] rounded-xl bg-[#050505] mb-6 overflow-hidden relative grayscale-[0.8] group-hover:grayscale-0 transition-all duration-1000">
-                    <img src="/rajan.jpg" alt="Rajan Kumar Karn" className="absolute inset-0 w-full h-full object-cover z-10 group-hover:scale-105 transition-transform duration-1000 ease-out" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent z-20"></div>
-                  </div>
+                <div className="glass-panel rounded-2xl p-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
                   <div className="relative z-40 transform translate-z-10 px-4">
                     <h3 className="text-2xl font-serif mb-2 text-white font-light">Rajan Kumar Karn</h3>
                     <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-5 font-mono">Founder & CEO</p>
@@ -142,11 +165,7 @@ export default function WhyV2R() {
             {/* Founder 2 */}
             <div className="relative group sm:translate-y-24 v2r-fade-up">
               <TiltCard>
-                <div className="glass-panel rounded-2xl p-3 pb-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
-                  <div className="w-full aspect-[4/5] rounded-xl bg-[#050505] mb-6 overflow-hidden relative grayscale-[0.8] group-hover:grayscale-0 transition-all duration-1000">
-                    <img src="/adarsh.jpg" alt="Adarsh Kumar" className="absolute inset-0 w-full h-full object-cover z-10 group-hover:scale-105 transition-transform duration-1000 ease-out" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent z-20"></div>
-                  </div>
+                <div className="glass-panel rounded-2xl p-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
                   <div className="relative z-40 transform translate-z-10 px-4">
                     <h3 className="text-2xl font-serif mb-2 text-white font-light">Adarsh Kumar</h3>
                     <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-5 font-mono">Co-Founder & COO</p>
