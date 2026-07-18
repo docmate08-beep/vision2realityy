@@ -15,29 +15,33 @@ export default function Hero() {
   useGSAP(() => {
     const tl = gsap.timeline();
     
-    // Slow infinite zoom for background
-    gsap.to('.hero-bg-img', { 
-      scale: 1.15, 
-      duration: 20, 
-      ease: 'none',
-      repeat: -1,
-      yoyo: true
-    });
+    let mm = gsap.matchMedia();
 
-    // Parallax on scroll
-    gsap.to('.hero-bg-img', {
-      yPercent: 30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: container.current,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
+    mm.add("(min-width: 768px)", () => {
+      // Slow infinite zoom for background ONLY on desktop
+      gsap.to('.hero-bg-img', { 
+        scale: 1.15, 
+        duration: 20, 
+        ease: 'none',
+        repeat: -1,
+        yoyo: true
+      });
+
+      // Parallax on scroll ONLY on desktop
+      gsap.to('.hero-bg-img', {
+        yPercent: 30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
     });
 
     // Intro Animations
-    tl.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 2.5 }) // Delayed for loader
+    tl.fromTo('.hero-badge', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.5 }) // Quick delay for loader
       .fromTo('.hero-desc', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, "-=0.5")
       .fromTo('.hero-btn', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.2 }, "-=0.5");
 
@@ -56,9 +60,9 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#050505]/20 via-transparent to-[#050505] z-10"></div>
       </div>
       
-      {/* Floating Glowing Orbs for depth */}
-      <div className="absolute top-1/3 left-1/4 w-[500px] max-w-[100vw] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] max-w-[100vw] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
+      {/* Floating Glowing Orbs for depth - Hidden on mobile for performance */}
+      <div className="hidden md:block absolute top-1/3 left-1/4 w-[500px] max-w-[100vw] h-[500px] bg-white/[0.03] rounded-full blur-[120px] pointer-events-none mix-blend-screen"></div>
+      <div className="hidden md:block absolute bottom-1/4 right-1/4 w-[400px] max-w-[100vw] h-[400px] bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none mix-blend-screen"></div>
 
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl relative z-20 text-center w-full">
         

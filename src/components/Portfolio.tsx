@@ -54,21 +54,9 @@ export default function Portfolio() {
     
     let mm = gsap.matchMedia();
 
-    // Mobile Animations
+    // Mobile Animations (Stripped for performance)
     mm.add("(max-width: 767px)", () => {
-      // Mobile image parallax
-      gsap.utils.toArray('.mobile-parallax-img').forEach((img: any) => {
-        gsap.to(img, {
-          yPercent: 20,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: img.parentNode,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true
-          }
-        });
-      });
+      // CSS-only transitions used for mobile
     });
 
     // Desktop Animations

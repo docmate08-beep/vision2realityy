@@ -29,7 +29,7 @@ export default function RateUs() {
           <div className="glass-panel rounded-3xl p-8 md:p-16 border-white/10 text-center relative overflow-hidden">
             
             {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-md max-h-md bg-primary/10 blur-[100px] pointer-events-none rounded-full"></div>
+            <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-md max-h-md bg-primary/10 blur-[100px] pointer-events-none rounded-full"></div>
 
             <AnimatePresence mode="wait">
               {!submitted ? (

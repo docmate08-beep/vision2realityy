@@ -80,7 +80,8 @@ export default function Process() {
     <section id="process" ref={container} className="py-32 sm:py-48 border-t border-white/5 bg-[#050505] relative overflow-hidden">
       
       {/* Background ambient light */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-white/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="hidden md:block absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="hidden md:block absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/[0.02] rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         

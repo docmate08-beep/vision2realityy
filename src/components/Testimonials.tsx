@@ -18,7 +18,7 @@ export default function Testimonials() {
   return (
     <section className="py-24 relative overflow-hidden">
       {/* Background glow */}
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
+      <div className="hidden md:block absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 translate-y-1/2"></div>
 
       <div className="container mx-auto px-6 max-w-6xl relative z-10">
         <motion.div
