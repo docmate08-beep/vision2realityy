@@ -7,14 +7,6 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const LinkedinIcon = ({ size = 16, className = "" }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-    <rect width="4" height="12" x="2" y="9"/>
-    <circle cx="4" cy="4" r="2"/>
-  </svg>
-);
-
 const stats = [
   { label: 'Combined Experience', value: '25+', suffix: ' Yrs', icon: Users },
   { label: 'Projects Delivered', value: '20+', suffix: '', icon: CheckCircle },
@@ -116,10 +108,9 @@ export default function WhyV2R() {
       </div>
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
-          
-          {/* Left: Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* Stats Grid Centered */}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
@@ -127,58 +118,18 @@ export default function WhyV2R() {
                   <TiltCard>
                     <div className="glass-panel rounded-2xl p-8 relative overflow-hidden h-full group hover:bg-white/[0.04] transition-colors border border-white/5 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-                      <div className="relative z-10">
-                        <Icon size={24} className="text-gray-400 mb-8 group-hover:text-white transition-colors duration-500" />
-                        <div className="text-4xl md:text-6xl font-serif font-light text-white mb-3 tracking-tight">
-                          {stat.value}<span className="text-2xl font-sans text-gray-500">{stat.suffix}</span>
+                      <div className="relative z-10 text-center">
+                        <Icon size={24} className="text-gray-400 mx-auto mb-6 group-hover:text-white transition-colors duration-500" />
+                        <div className="text-3xl md:text-5xl font-serif font-light text-white mb-2 tracking-tight">
+                          {stat.value}<span className="text-xl font-sans text-gray-500">{stat.suffix}</span>
                         </div>
-                        <div className="text-[10px] md:text-xs font-mono text-gray-500 uppercase tracking-[0.2em]">{stat.label}</div>
+                        <div className="text-[10px] font-mono text-gray-500 uppercase tracking-[0.2em]">{stat.label}</div>
                       </div>
                     </div>
                   </TiltCard>
                 </div>
               );
             })}
-          </div>
-
-          {/* Right: Founders */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 relative">
-            
-            {/* Founder 1 */}
-            <div className="relative group v2r-fade-up">
-              <TiltCard>
-                <div className="glass-panel rounded-2xl p-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
-                  <div className="relative z-40 transform translate-z-10 px-4">
-                    <h3 className="text-2xl font-serif mb-2 text-white font-light">Rajan Kumar Karn</h3>
-                    <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-5 font-mono">Founder & CEO</p>
-                    <div className="flex flex-col items-center gap-4">
-                      <div className="inline-block px-5 py-2 bg-white/[0.03] rounded-full text-[10px] text-gray-300 font-mono tracking-widest border border-white/10 uppercase">IIT Alumnus</div>
-                      <a href="https://www.linkedin.com/in/rajan-kumar-karn-853baa23b/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors text-xs font-mono tracking-widest uppercase">
-                        <LinkedinIcon size={14} /> LinkedIn
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </div>
-
-            {/* Founder 2 */}
-            <div className="relative group sm:translate-y-24 v2r-fade-up">
-              <TiltCard>
-                <div className="glass-panel rounded-2xl p-8 flex flex-col items-center text-center border border-white/5 hover:border-white/20 transition-colors duration-700 bg-[#0A0A0A]">
-                  <div className="relative z-40 transform translate-z-10 px-4">
-                    <h3 className="text-2xl font-serif mb-2 text-white font-light">Adarsh Kumar</h3>
-                    <p className="text-[10px] text-gray-500 tracking-[0.2em] uppercase mb-5 font-mono">Co-Founder & COO</p>
-                    <div className="mt-8">
-                      <a href="https://www.linkedin.com/in/adarsh-kumar-5b0431230/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-gray-500 hover:text-white transition-colors text-xs font-mono tracking-widest uppercase mt-1">
-                        <LinkedinIcon size={14} /> LinkedIn
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </div>
-
           </div>
         </div>
       </div>

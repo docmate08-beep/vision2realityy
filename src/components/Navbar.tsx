@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { getWhatsAppLink } from '../lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -46,6 +47,12 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+          <Link
+            to="/"
+            className="text-sm text-gray-400 hover:text-white transition-colors font-medium ml-2 mr-2"
+          >
+            ← Back to TheMate
+          </Link>
           <a 
             href={getWhatsAppLink(defaultWhatsAppMsg)}
             target="_blank"
@@ -84,6 +91,13 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
+            <Link
+              to="/"
+              className="text-xl font-serif text-gray-300 hover:text-white py-3 border-b border-white/5"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              ← Back to TheMate
+            </Link>
             <a 
               href={getWhatsAppLink(defaultWhatsAppMsg)}
               target="_blank"
