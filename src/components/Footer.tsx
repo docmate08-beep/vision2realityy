@@ -64,7 +64,8 @@ export default function Footer() {
               <li><a href="#about" className="text-gray-400 hover:text-primary transition-colors">About Us</a></li>
               <li><a href="#process" className="text-gray-400 hover:text-primary transition-colors">Our Process</a></li>
               <li><a href="#work" className="text-gray-400 hover:text-primary transition-colors">Work</a></li>
-              <li><a href={getWhatsAppLink(defaultWhatsAppMsg)} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors">Contact</a></li>
+              <li><a href="mailto:hello@themate.in" className="text-gray-400 hover:text-primary transition-colors">hello@themate.in</a></li>
+              <li><a href="tel:8796879297" className="text-gray-400 hover:text-primary transition-colors">+91 8796879297</a></li>
             </ul>
           </div>
         </div>

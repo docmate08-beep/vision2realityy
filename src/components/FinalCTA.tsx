@@ -42,7 +42,7 @@ export default function FinalCTA() {
           className="mt-6 sm:mt-8 md:mt-10"
         >
           <a
-            href="mailto:hello@themate.in"
+            href="tel:8796879297"
             className="cta-primary text-[0.875rem] sm:text-[0.9375rem]"
           >
             Start a Conversation

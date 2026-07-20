@@ -90,8 +90,7 @@ export default function Navigation() {
                 <a href="tel:+918796879297" className="text-[11px] hover:opacity-100 font-mono transition">+91 8796879297</a>
               </div>
               <a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+                href="tel:8796879297"
                 className={`transition duration-400 ${
                   scrolled 
                     ? 'cta-premium' 
@@ -175,8 +174,7 @@ export default function Navigation() {
                   </motion.a>
                 ))}
                 <motion.a
-                  href="#contact"
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+                  href="tel:8796879297"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 + (navLinks.length * 0.05) }}

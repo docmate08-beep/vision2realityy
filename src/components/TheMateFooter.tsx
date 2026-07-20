@@ -50,6 +50,12 @@ export default function Footer() {
                 hello@themate.in
               </a>
               <a
+                href="tel:8796879297"
+                className="text-[0.8125rem] sm:text-[0.875rem] font-sans text-white/70 hover:text-white transition-colors duration-300"
+              >
+                +91 8796879297
+              </a>
+              <a
                 href="https://linkedin.com/company/themate"
                 target="_blank"
                 rel="noopener noreferrer"
