@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "concurrently \"vite\" \"node server.js\"",
     "build": "tsc -b && vite build",
+    "postinstall": "npm run build",
+    "start": "node server.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
