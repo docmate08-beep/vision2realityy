@@ -37,7 +37,11 @@ export default function Navbar() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-6">
+          <div className="hidden lg:flex flex-col text-right mr-2 border-r border-white/20 pr-6">
+            <a href="mailto:hello@themate.in" className="text-[11px] text-gray-400 hover:text-white font-mono transition">hello@themate.in</a>
+            <a href="tel:+918796879297" className="text-[11px] text-gray-400 hover:text-white font-mono transition">+91 8796879297</a>
+          </div>
           {navLinks.map((link) => (
             <a 
               key={link.name}
@@ -89,6 +93,12 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="absolute top-full left-0 w-full bg-[#050505] border-t border-white/10 p-6 md:hidden flex flex-col gap-4 shadow-2xl z-50 overflow-hidden"
           >
+            {/* Mobile Contact Info */}
+            <div className="flex flex-col gap-2 pb-4 mb-2 border-b border-white/10">
+              <a href="mailto:hello@themate.in" className="text-gray-300 hover:text-white font-mono text-sm transition">hello@themate.in</a>
+              <a href="tel:+918796879297" className="text-gray-300 hover:text-white font-mono text-sm transition">+91 8796879297</a>
+            </div>
+
             {navLinks.map((link) => (
               <a 
                 key={link.name}

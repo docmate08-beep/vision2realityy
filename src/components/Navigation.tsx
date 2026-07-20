@@ -84,7 +84,11 @@ export default function Navigation() {
             </div>
 
             {/* CTA / Right - Desktop */}
-            <div className="hidden md:flex justify-end">
+            <div className="hidden md:flex justify-end items-center gap-4 lg:gap-6">
+              <div className={`hidden lg:flex flex-col text-right items-end transition duration-400 ${scrolled ? 'text-[#111827]/70' : 'text-white/70'}`}>
+                <a href="mailto:hello@themate.in" className="text-[11px] hover:opacity-100 font-mono transition">hello@themate.in</a>
+                <a href="tel:+918796879297" className="text-[11px] hover:opacity-100 font-mono transition">+91 8796879297</a>
+              </div>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
@@ -146,6 +150,17 @@ export default function Navigation() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex flex-col items-start gap-8">
+                {/* Mobile Contact Info */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col gap-2 w-full pb-6 border-b border-[#111827]/10"
+                >
+                  <a href="mailto:hello@themate.in" className="text-[#111827]/80 hover:text-[#111827] font-mono text-sm transition">hello@themate.in</a>
+                  <a href="tel:+918796879297" className="text-[#111827]/80 hover:text-[#111827] font-mono text-sm transition">+91 8796879297</a>
+                </motion.div>
+                
                 {navLinks.map((link, i) => (
                   <motion.a
                     key={link.label}
