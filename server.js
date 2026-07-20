@@ -16,7 +16,7 @@ app.use(express.json());
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'dist')));
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 const SYSTEM_PROMPT = `You are the V2R Assistant — the official AI assistant for V2R (Vision to Reality),
 an engineering-led software agency founded by engineers.
