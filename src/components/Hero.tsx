@@ -73,7 +73,8 @@ export default function Hero() {
         </div>
 
         {/* Main Headline with Split Text */}
-        <div className="relative mb-6 sm:mb-10 pointer-events-none w-full">
+        {/* Main Headline with Split Text - Wrapped in H1 for SEO/GEO */}
+        <h1 className="relative mb-6 sm:mb-10 pointer-events-none w-full">
           <AnimatedText 
             text="Vision to" 
             type="chars" 
@@ -88,7 +89,7 @@ export default function Hero() {
             delay={1.8} 
             className="text-[12vw] sm:text-6xl md:text-8xl lg:text-[9rem] font-light font-serif italic leading-[1] tracking-tight justify-center mt-1 sm:mt-2 text-gray-300" 
           />
-        </div>
+        </h1>
 
         <p className="hero-desc text-base sm:text-lg md:text-2xl text-gray-400 max-w-[90%] sm:max-w-3xl mx-auto mb-10 sm:mb-16 font-sans leading-relaxed tracking-wide">
           The best minds building your product. From complex AI automations to scalable web applications — everything engineered in one place.

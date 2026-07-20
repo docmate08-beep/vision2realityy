@@ -13,6 +13,7 @@ import WhyTheMate from './components/WhyTheMate';
 import Philosophy from './components/Philosophy';
 import FinalCTA from './components/FinalCTA';
 import TheMateFooter from './components/TheMateFooter';
+import SEO from './components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,12 +80,31 @@ function App() {
     };
   }, []);
 
+  const themateSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TheMate",
+    "url": "https://themate.in",
+    "logo": "https://themate.in/v2r-icon-mark.svg",
+    "description": "TheMate is a global technology holding company that creates, operates, and scales exceptional digital businesses across industries.",
+    "sameAs": [
+      "https://linkedin.com/company/themate"
+    ]
+  };
+
   return (
     <div
       className={`relative min-h-[100dvh] w-full overflow-x-hidden bg-mate-bg ${
         !loaded ? 'h-[100dvh] overflow-hidden' : ''
       }`}
     >
+      <SEO 
+        title="TheMate | Technology Holding Company"
+        description="TheMate creates, operates and scales exceptional businesses across industries — through strategy, innovation and long-term vision."
+        canonical="/"
+        schema={themateSchema}
+      />
+
       {/* Loader */}
       <AnimatePresence mode="wait">
         {!loaded && <Loader onComplete={() => setLoaded(true)} />}

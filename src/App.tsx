@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import ErrorBoundary from './components/ErrorBoundary';
 import NotFound from './components/NotFound';
 
@@ -16,17 +17,19 @@ const GlobalLoader = () => (
 
 function App() {
   return (
-    <ErrorBoundary>
-      <Router>
-        <Suspense fallback={<GlobalLoader />}>
-          <Routes>
-            <Route path="/" element={<TheMateApp />} />
-            <Route path="/v2r" element={<V2RApp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </Router>
-    </ErrorBoundary>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <Router>
+          <Suspense fallback={<GlobalLoader />}>
+            <Routes>
+              <Route path="/" element={<TheMateApp />} />
+              <Route path="/v2r" element={<V2RApp />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </Router>
+      </ErrorBoundary>
+    </HelmetProvider>
   );
 }
 
