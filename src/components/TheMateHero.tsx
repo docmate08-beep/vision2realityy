@@ -32,8 +32,12 @@ function ParticleField() {
     }
 
     const onResize = () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+      // Mobile scroll address bar changes innerHeight, causing a canvas reset and blink.
+      // Only resize if width changes (e.g. device rotation).
+      if (Math.abs(window.innerWidth - w) > 10) {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+      }
     };
     window.addEventListener('resize', onResize);
 
