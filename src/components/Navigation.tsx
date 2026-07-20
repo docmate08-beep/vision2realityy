@@ -42,14 +42,14 @@ export default function Navigation() {
             width: scrolled ? '90%' : '100%',
           }}
           transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
-          className={`pointer-events-auto max-w-[1440px] transition-all duration-400 ${
+          className={`pointer-events-auto max-w-[1440px] transition duration-400 ${
             scrolled 
               ? 'glass-pill-nav bg-[rgba(255,255,255,0.85)] shadow-[0_12px_40px_rgba(15,23,42,0.12)] rounded-full' 
               : 'bg-transparent rounded-none border-transparent shadow-none'
           }`}
         >
           {/* We use a container that matches the site's padding when NOT scrolled, and strict padding when scrolled */}
-          <div className={`transition-all duration-400 grid grid-cols-2 md:grid-cols-3 items-center ${
+          <div className={`transition duration-400 grid grid-cols-2 md:grid-cols-3 items-center ${
             scrolled ? 'px-6 md:px-8 h-[64px] md:h-[72px]' : 'section-container h-[72px] md:h-[80px]'
           }`}>
             {/* Logo */}
@@ -88,7 +88,7 @@ export default function Navigation() {
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-                className={`transition-all duration-400 ${
+                className={`transition duration-400 ${
                   scrolled 
                     ? 'cta-premium' 
                     : 'text-[0.8125rem] font-sans font-medium tracking-[0.03em] text-white px-5 py-2.5 border border-white/[0.15] rounded-[2px] hover:bg-white/[0.04] hover:border-white/[0.25]'
@@ -134,7 +134,7 @@ export default function Navigation() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[98] bg-[#050505]/40 backdrop-blur-sm md:hidden flex justify-end"
+            className="fixed inset-0 z-[98] bg-[#050505]/40 backdrop-blur-sm md:hidden flex justify-end isolate"
             onClick={() => setMobileOpen(false)}
           >
             <motion.div

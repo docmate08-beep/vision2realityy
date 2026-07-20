@@ -60,7 +60,7 @@ export default function Loader({ onComplete }: LoaderProps) {
         
         <div className="w-32 sm:w-48 h-[1px] bg-white/10 mt-6 relative overflow-hidden mx-auto">
           <div 
-            className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
+            className="absolute top-0 left-0 h-full bg-white transition duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>

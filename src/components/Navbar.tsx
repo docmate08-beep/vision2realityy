@@ -27,7 +27,7 @@ export default function Navbar() {
 
   return (
     <header 
-      className={`fixed top-0 w-full z-40 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-40 transition duration-300 ${
         isScrolled ? 'glass-panel py-3' : 'bg-transparent py-5'
       }`}
     >

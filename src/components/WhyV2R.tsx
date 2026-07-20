@@ -102,7 +102,7 @@ export default function WhyV2R() {
           </div>
         </div>
         
-        <div className="max-w-[95%] sm:max-w-3xl mx-auto md:text-center text-gray-400 text-lg sm:text-xl md:text-2xl font-sans leading-relaxed v2r-fade-up font-light tracking-wide will-change-transform">
+        <div className="max-w-[95%] sm:max-w-3xl mx-auto md:text-center text-gray-400 text-lg sm:text-xl md:text-2xl font-sans leading-relaxed v2r-fade-up font-light tracking-wide">
           We don't just write code; we architect systems that scale. When you work with V2R, you're partnering with top-tier technical talent dedicated to turning your vision into a robust reality.
         </div>
       </div>

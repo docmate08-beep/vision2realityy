@@ -62,7 +62,7 @@ export default function RateUs() {
                           size={48} 
                           strokeWidth={1}
                           className={cn(
-                            "transition-all duration-300 relative z-10",
+                            "transition duration-300 relative z-10",
                             (hoverRating || rating) >= star 
                               ? "text-yellow-400 fill-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.5)]" 
                               : "text-gray-600"

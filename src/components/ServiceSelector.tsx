@@ -65,14 +65,14 @@ export default function ServiceSelector() {
               text="What do you need" 
               type="chars" 
               animation="fadeUp" 
-              className="text-[10vw] sm:text-5xl md:text-7xl font-serif tracking-tight text-white leading-none will-change-transform"
+              className="text-[10vw] sm:text-5xl md:text-7xl font-serif tracking-tight text-white leading-none"
             />
             <AnimatedText 
               text="Built?" 
               type="chars" 
               animation="blurIn" 
               delay={0.2}
-              className="text-[10vw] sm:text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none mt-1 sm:mt-2 will-change-transform"
+              className="text-[10vw] sm:text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none mt-1 sm:mt-2"
             />
           </div>
           <div className="max-w-md">
@@ -113,7 +113,7 @@ export default function ServiceSelector() {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 flex items-center justify-between px-6 sm:px-12 py-10 sm:py-16 transition-all duration-500 group-hover:pl-10 sm:group-hover:pl-16">
+                <div className="relative z-10 flex items-center justify-between px-6 sm:px-12 py-10 sm:py-16 transition duration-500 group-hover:pl-10 sm:group-hover:pl-16">
                   
                   <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-16 w-full">
                     <span className="text-gray-600 font-mono text-sm tracking-[0.2em]">0{index + 1}</span>
@@ -139,7 +139,7 @@ export default function ServiceSelector() {
 
                   {/* Checkbox / Select Indicator */}
                   <div className={cn(
-                    "w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-white/20 flex items-center justify-center transition-all duration-500 flex-shrink-0 ml-4 sm:ml-0 relative overflow-hidden",
+                    "w-8 h-8 sm:w-12 sm:h-12 rounded-full border border-white/20 flex items-center justify-center transition duration-500 flex-shrink-0 ml-4 sm:ml-0 relative overflow-hidden",
                     isSelected ? "bg-white border-white scale-110 shadow-[0_0_20px_rgba(255,255,255,0.3)]" : "group-hover:border-white/60"
                   )}>
                     {/* Liquid fill animation background */}
@@ -173,7 +173,7 @@ export default function ServiceSelector() {
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
             className="fixed bottom-6 left-4 right-4 md:bottom-8 md:left-1/2 md:-translate-x-1/2 z-[60] md:w-[600px] pointer-events-auto"
           >
-            <div className="glass-panel border-white/20 p-4 md:p-4 rounded-3xl md:rounded-full flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-3xl bg-black/80">
+            <div className="glass-panel border-white/20 p-4 md:p-4 rounded-3xl md:rounded-full flex flex-col sm:flex-row items-center justify-between gap-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-3xl bg-black/80 isolate">
               <div className="px-4 text-sm md:text-base flex items-center justify-center gap-3 w-full sm:w-auto font-mono">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 <span className="text-gray-400 uppercase tracking-widest text-[10px]">Selected</span>

@@ -112,18 +112,18 @@ export default function Portfolio() {
               text="Selected" 
               type="chars" 
               animation="fadeUp" 
-              className="text-[12vw] sm:text-5xl md:text-7xl font-serif tracking-tight text-white leading-none pointer-events-auto will-change-transform"
+              className="text-[12vw] sm:text-5xl md:text-7xl font-serif tracking-tight text-white leading-none pointer-events-auto"
             />
             <AnimatedText 
               text="Work." 
               type="chars" 
               animation="blurIn" 
               delay={0.2}
-              className="text-[12vw] sm:text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none pointer-events-auto will-change-transform"
+              className="text-[12vw] sm:text-5xl md:text-7xl font-serif font-light italic text-gray-500 tracking-tight leading-none pointer-events-auto"
             />
           </div>
           <div className="pointer-events-auto mt-4 sm:mt-0 w-full sm:w-auto">
-            <a href="#services" className="group flex sm:inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 sm:py-4 rounded-full border border-white/20 hover:border-white transition-colors uppercase tracking-[0.2em] text-[10px] sm:text-xs text-white font-mono bg-white/[0.02] backdrop-blur-sm w-full sm:w-auto">
+            <a href="#services" className="group flex sm:inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-4 sm:py-4 rounded-full border border-white/20 hover:border-white transition-colors uppercase tracking-[0.2em] text-[10px] sm:text-xs text-white font-mono bg-white/[0.02] backdrop-blur-sm w-full sm:w-auto isolate">
               Start your project <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </a>
           </div>
@@ -135,8 +135,8 @@ export default function Portfolio() {
           <div className="flex flex-col gap-12">
             {projects.map((project) => (
               <div key={project.title} className="flex flex-col gap-6 mobile-fade-up">
-                <div className="w-full h-[60vh] rounded-2xl overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-                  <img src={project.image} alt={project.title} loading="lazy" className="mobile-parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%] will-change-transform" />
+                <div className="w-full h-[60vh] rounded-2xl overflow-hidden relative grayscale hover:grayscale-0 transition duration-700 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                  <img src={project.image} alt={project.title} loading="lazy" className="mobile-parallax-img absolute inset-0 w-full h-[120%] object-cover -top-[10%]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
                 </div>
                 <div>
@@ -172,7 +172,7 @@ export default function Portfolio() {
                       src={project.image} 
                       alt={project.title} 
                       loading="lazy"
-                      className="portfolio-parallax-img absolute inset-0 w-[120%] h-full object-cover -left-[10%] grayscale-[0.5] group-hover:grayscale-0 transition-all duration-1000" 
+                      className="portfolio-parallax-img absolute inset-0 w-[120%] h-full object-cover -left-[10%] grayscale-[0.5] group-hover:grayscale-0 transition duration-1000" 
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>
                   </div>

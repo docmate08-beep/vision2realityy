@@ -133,9 +133,9 @@ export default function Process() {
                 <div className="flex flex-row lg:flex-col gap-8 lg:gap-10 items-start lg:items-center text-left lg:text-center">
                   
                   {/* Number Node */}
-                  <div className="flex-shrink-0 w-[90px] h-[90px] rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative overflow-hidden transition-all duration-300">
+                  <div className="flex-shrink-0 w-[90px] h-[90px] rounded-full bg-[#0A0A0A] border border-white/10 flex items-center justify-center relative overflow-hidden transition duration-300">
                     {/* Glow background (animated) */}
-                    <div className="node-bg absolute inset-0 bg-white opacity-0 scale-50 rounded-full transition-all duration-300"></div>
+                    <div className="node-bg absolute inset-0 bg-white opacity-0 scale-50 rounded-full transition duration-300"></div>
                     <span className="node-text font-serif text-3xl font-light text-white/30 relative z-10 transition-colors duration-300">
                       {step.id}
                     </span>

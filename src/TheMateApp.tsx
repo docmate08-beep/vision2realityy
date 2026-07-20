@@ -81,8 +81,8 @@ function App() {
 
   return (
     <div
-      className={`relative min-h-[100svh] w-full overflow-x-hidden bg-mate-bg ${
-        !loaded ? 'h-[100svh] overflow-hidden' : ''
+      className={`relative min-h-[100dvh] w-full overflow-x-hidden bg-mate-bg ${
+        !loaded ? 'h-[100dvh] overflow-hidden' : ''
       }`}
     >
       {/* Loader */}

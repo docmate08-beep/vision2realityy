@@ -91,7 +91,7 @@ export default function StartupPipeline() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/[0.03] text-white text-xs font-mono tracking-[0.2em] uppercase mb-8 backdrop-blur-md cursor-default"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/[0.03] text-white text-xs font-mono tracking-[0.2em] uppercase mb-8 backdrop-blur-md cursor-default isolate"
           >
             <Rocket size={14} className="text-gray-400" />
             <span>Startup your startup</span>
