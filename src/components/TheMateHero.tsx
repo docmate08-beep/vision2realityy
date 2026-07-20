@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 /* ─── Minimal Particle Canvas ─── */
 function ParticleField() {
@@ -183,17 +184,17 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 md:mt-10"
         >
           <button
-            onClick={() => handleScroll('#companies')}
+            onClick={() => handleScroll('#services')}
             className="cta-primary w-full sm:w-auto"
           >
             Explore Our Services
           </button>
-          <button
-            onClick={() => handleScroll('#contact')}
-            className="cta-secondary w-full sm:w-auto"
+          <Link
+            to="/v2r"
+            className="cta-secondary flex items-center justify-center w-full sm:w-auto"
           >
-            Start a Conversation
-          </button>
+            Vision 2 Reality
+          </Link>
         </motion.div>
       </div>
     </section>

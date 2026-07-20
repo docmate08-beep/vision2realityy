@@ -24,10 +24,10 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Companies */}
+          {/* Services */}
           <div className="col-span-1 md:col-span-3">
             <span className="text-caption font-sans font-medium tracking-[0.12em] uppercase text-mate-text2 block mb-3 sm:mb-4">
-              Companies
+              Services
             </span>
             <button
               onClick={handleV2RClick}

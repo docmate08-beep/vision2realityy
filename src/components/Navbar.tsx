@@ -63,13 +63,21 @@ export default function Navbar() {
           </a>
         </nav>
 
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden text-white p-2 -mr-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        {/* Mobile Nav & Toggle */}
+        <div className="flex items-center gap-3 md:hidden">
+          <Link 
+            to="/" 
+            className="text-xs text-gray-300 font-medium px-3 py-1.5 border border-white/20 rounded-full hover:bg-white/10 transition-colors"
+          >
+            ← TheMate
+          </Link>
+          <button 
+            className="text-white p-2 -mr-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Nav */}

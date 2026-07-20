@@ -26,7 +26,7 @@ export default function OurCompanies() {
   return (
     <section
       ref={sectionRef}
-      id="companies"
+      id="services"
       className="relative py-12 md:py-20"
     >
       <div className="section-container">
@@ -37,7 +37,7 @@ export default function OurCompanies() {
           transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] as [number, number, number, number] }}
         >
           <span className="text-caption font-sans font-medium tracking-[0.15em] uppercase text-mate-text2 block mb-4 sm:mb-5">
-            Our Companies
+            Our Services
           </span>
           <h2 className="text-editorial text-white max-w-[600px]"
             style={{ fontSize: 'clamp(1.5rem, 3vw, 2.75rem)' }}
